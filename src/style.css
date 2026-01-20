@@ -379,11 +379,15 @@ ul {
   border-radius: 2px;
 }
 
-.nav-links a:not(.btn-primary-sm):hover {
+
+
+.nav-links a:not(.btn-primary-sm):hover,
+.nav-links a:not(.btn-primary-sm).active {
   color: #fff;
 }
 
-.nav-links a:not(.btn-primary-sm):hover::after {
+.nav-links a:not(.btn-primary-sm):hover::after,
+.nav-links a:not(.btn-primary-sm).active::after {
   width: 100%;
 }
 

@@ -69,14 +69,43 @@ if (overlay) {
   overlay.addEventListener('click', closeMobileMenu);
 }
 
-// --- Header Scroll Effect ---
+// --- Header Scroll Effect & Smart Hide ---
 const header = document.querySelector('.glass-header');
+let lastScrollY = window.scrollY;
+
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
+  const currentScrollY = window.scrollY;
+
+  // Glass effect
+  if (currentScrollY > 50) {
     header.classList.add('scrolled');
   } else {
     header.classList.remove('scrolled');
   }
+});
+
+
+// --- Active Link Highlighter ---
+const sections = document.querySelectorAll('section');
+const navLi = document.querySelectorAll('.nav-links li a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLi.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href').includes(current) && current !== '') {
+      a.classList.add('active');
+    }
+  });
 });
 
 // --- Number Counter Animation ---
