@@ -270,3 +270,30 @@ window.finishQuiz = function (points) {
     msgElement.textContent = "Критический уровень! Вам срочно нужен цифровой детокс.";
   }
 };
+// --- Form Handling ---
+const form = document.getElementById('lead-form');
+const formContainer = document.querySelector('.cta-form');
+const successMessage = document.querySelector('.form-success');
+
+if (form) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Simulate API call
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    btn.textContent = 'Отправка...';
+
+    setTimeout(() => {
+      form.classList.add('hidden');
+      successMessage.classList.remove('hidden');
+      btn.textContent = originalText;
+      form.reset();
+    }, 1000);
+  });
+}
+
+window.resetForm = function () {
+  form.classList.remove('hidden');
+  successMessage.classList.add('hidden');
+};

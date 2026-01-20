@@ -1079,7 +1079,9 @@ footer {
   display: none;
 }
 
-/* New Footer Styles */
+
+
+/* Footer Grid Fix */
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1096,6 +1098,52 @@ footer {
 
 .footer-links li {
   margin-bottom: 0.8rem;
+}
+
+/* Form Styles */
+.cta-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.cta-form.hidden {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.form-success {
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+  padding: 2rem 0;
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.form-success h3 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.form-success p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
 }
 
 .footer-links a {
