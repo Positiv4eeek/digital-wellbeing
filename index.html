@@ -21,6 +21,9 @@
 </head>
 
 <body>
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
   <div id="app">
     <div class="fixed-background">
       <div class="orb orb-1"></div>
@@ -57,7 +60,7 @@
           </p>
           <div class="hero-actions">
             <a href="#cta" class="btn-primary">Запустить в школе</a>
-            <button onclick="openQuiz()" class="btn-secondary">Пройти тест на стресс</button>
+            <button id="open-quiz-btn" class="btn-secondary">Пройти тест на стресс</button>
           </div>
 
           <div class="stats-grid">
@@ -139,14 +142,12 @@
                 </div>
               </li>
               <li>
-              <li>
                 <span class="check-icon"><i class="fa-brands fa-telegram"></i></span>
                 <div>
-                  <div>
-                    <strong>Бот в Telegram</strong>
-                    <p>Дополнительные материалы, чат участников и поддержка кураторов.</p>
-                    <a href="https://t.me/DigitalWellbeing_bot" target="_blank" class="btn-text">Перейти в канал →</a>
-                  </div>
+                  <strong>Бот в Telegram</strong>
+                  <p>Дополнительные материалы, чат участников и поддержка кураторов.</p>
+                  <a href="https://t.me/DigitalWellbeing_bot" target="_blank" class="btn-text">Перейти в канал →</a>
+                </div>
               </li>
             </ul>
           </div>
@@ -213,7 +214,7 @@
             <div class="review-card glass-card animate-on-scroll">
               <div class="review-header">
                 <!-- Вставьте фото в папку assets/ -->
-                <img src="assets/avatar1.jpg" alt="Айгуль Сериковна" class="avatar">
+                <img src="assets/avatar1.jpg" alt="Айгуль Сериковна" class="avatar" loading="lazy">
                 <div>
                   <h4>Айгуль Сериковна</h4>
                   <span>Завуч школы №45</span>
@@ -221,9 +222,10 @@
               </div>
               <p>Успеваемость в 8-х классах выросла на 15% всего за месяц после программы. Дети стали спокойнее.</p>
             </div>
+
             <div class="review-card glass-card animate-on-scroll">
               <div class="review-header">
-                <img src="assets/avatar2.jpg" alt="Семья Оспановых" class="avatar">
+                <img src="assets/avatar2.jpg" alt="Семья Оспановых" class="avatar" loading="lazy">
                 <div>
                   <h4>Семья Оспановых</h4>
                   <span>Родители</span>
@@ -231,9 +233,10 @@
               </div>
               <p>Мы наконец-то начали ужинать без телефонов. Сын сам предложил убирать гаджеты после 20:00.</p>
             </div>
+
             <div class="review-card glass-card animate-on-scroll">
               <div class="review-header">
-                <img src="assets/avatar3.jpg" alt="Алихан" class="avatar">
+                <img src="assets/avatar3.jpg" alt="Алихан" class="avatar" loading="lazy">
                 <div>
                   <h4>Алихан</h4>
                   <span>Ученик 10 класса</span>
@@ -241,8 +244,6 @@
               </div>
               <p>Думал, не смогу прожить и дня без ТикТока. Оказалось, у меня куча свободного времени на спорт.</p>
             </div>
-          </div>
-        </div>
       </section>
 
       <!-- FAQ Section -->
@@ -312,8 +313,7 @@
         <div class="container text-center">
           <h2 class="gradient-text">Внедрите культуру цифрового благополучия</h2>
           <p>Оставьте заявку, чтобы получить полную программу курса и условия внедрения.</p>
-          <form class="cta-form glass-card"
-            onsubmit="event.preventDefault(); alert('Спасибо за заявку! Мы свяжемся с вами.');">
+          <form class="cta-form glass-card">
             <input type="text" placeholder="Ваше имя" required>
             <input type="email" placeholder="Email школы/колледжа" required>
             <input type="tel" placeholder="Телефон" required>
@@ -328,6 +328,11 @@
       <a href="#cta" class="btn-primary btn-block">Начать программу</a>
     </div>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Наверх">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
     <!-- Quiz Modal -->
     <div id="quiz-modal" class="modal-overlay">
       <div class="modal-content glass-card">
@@ -336,44 +341,50 @@
           <div class="quiz-step" data-step="start">
             <h3>Тест: Ваш уровень цифрового стресса</h3>
             <p>Узнайте, насколько гаджеты влияют на ваше состояние.</p>
-            <button class="btn-primary" onclick="startQuiz()">Начать тест</button>
+            <button class="btn-primary" id="start-quiz-btn">Начать тест</button>
           </div>
+        </div>
 
-          <div class="quiz-step hidden" data-step="1">
-            <h4>Вопрос 1/3</h4>
-            <p>Первое, что вы делаете утром — берете телефон в руки?</p>
+        <div class="quiz-step hidden" data-step="1">
+          <h4>Вопрос 1/3</h4>
+          <p>Первое, что вы делаете утром — берете телефон в руки?</p>
+          <div class="quiz-options">
             <div class="quiz-options">
-              <button class="btn-secondary option-btn" onclick="nextQuestion(10)">Да, всегда</button>
-              <button class="btn-secondary option-btn" onclick="nextQuestion(5)">Иногда</button>
-              <button class="btn-secondary option-btn" onclick="nextQuestion(0)">Нет, сначала завтрак</button>
+              <button class="btn-secondary option-btn" data-points="10">Да, всегда</button>
+              <button class="btn-secondary option-btn" data-points="5">Иногда</button>
+              <button class="btn-secondary option-btn" data-points="0">Нет, сначала завтрак</button>
             </div>
           </div>
+        </div>
 
-          <div class="quiz-step hidden" data-step="2">
-            <h4>Вопрос 2/3</h4>
-            <p>Чувствуете ли вы тревогу, если забыли телефон дома?</p>
+        <div class="quiz-step hidden" data-step="2">
+          <h4>Вопрос 2/3</h4>
+          <p>Чувствуете ли вы тревогу, если забыли телефон дома?</p>
+          <div class="quiz-options">
             <div class="quiz-options">
-              <button class="btn-secondary option-btn" onclick="nextQuestion(10)">Паника!</button>
-              <button class="btn-secondary option-btn" onclick="nextQuestion(5)">Дискомфорт</button>
-              <button class="btn-secondary option-btn" onclick="nextQuestion(0)">Спокойно переживу</button>
+              <button class="btn-secondary option-btn" data-points="10">Паника!</button>
+              <button class="btn-secondary option-btn" data-points="5">Дискомфорт</button>
+              <button class="btn-secondary option-btn" data-points="0">Спокойно переживу</button>
             </div>
           </div>
+        </div>
 
-          <div class="quiz-step hidden" data-step="3">
-            <h4>Вопрос 3/3</h4>
-            <p>Сколько времени в день вы проводите в соцсетях?</p>
+        <div class="quiz-step hidden" data-step="3">
+          <h4>Вопрос 3/3</h4>
+          <p>Сколько времени в день вы проводите в соцсетях?</p>
+          <div class="quiz-options">
             <div class="quiz-options">
-              <button class="btn-secondary option-btn" onclick="finishQuiz(10)">Более 3 часов</button>
-              <button class="btn-secondary option-btn" onclick="finishQuiz(5)">1-2 часа</button>
-              <button class="btn-secondary option-btn" onclick="finishQuiz(0)">Меньше часа</button>
+              <button class="btn-secondary option-btn" data-points="10" data-final="true">Более 3 часов</button>
+              <button class="btn-secondary option-btn" data-points="5" data-final="true">1-2 часа</button>
+              <button class="btn-secondary option-btn" data-points="0" data-final="true">Меньше часа</button>
             </div>
           </div>
+        </div>
 
-          <div class="quiz-step hidden" data-step="result">
-            <h3>Ваш результат: <span id="quiz-score">0</span>% стресса</h3>
-            <p id="quiz-msg"></p>
-            <a href="#cta" class="btn-primary" onclick="closeQuiz()">Получить программу спасения</a>
-          </div>
+        <div class="quiz-step hidden" data-step="result">
+          <h3>Ваш результат: <span id="quiz-score">0</span>% стресса</h3>
+          <p id="quiz-msg"></p>
+          <a href="#cta" class="btn-primary" id="close-quiz-btn">Получить программу спасения</a>
         </div>
       </div>
     </div>
