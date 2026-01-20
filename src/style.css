@@ -508,10 +508,11 @@ ul {
 }
 
 .feature-card .icon {
-  font-size: 3.5rem;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
   display: inline-block;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  color: var(--primary);
+  filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4));
 }
 
 .feature-card h3 {
@@ -563,6 +564,7 @@ ul {
   font-weight: bold;
   flex-shrink: 0;
   box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+  font-size: 1.2rem;
 }
 
 .check-list strong {
@@ -660,6 +662,32 @@ footer {
   font-size: 0.9rem;
   background: rgba(15, 12, 41, 0.95);
   backdrop-filter: blur(10px);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.social-icons a:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
 }
 
 /* Mobile Menu */
