@@ -868,12 +868,39 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
+  /* Context for absolute quote */
+}
+
+/* Stylish Quote Icon */
+.review-card p::before {
+  content: '“';
+  font-family: serif;
+  /* Elegant font for quote */
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 5rem;
+  color: var(--primary);
+  opacity: 0.15;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .review-header {
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
+  /* Ensure text is above quote */
+  z-index: 2;
+}
+
+.review-card p {
+  position: relative;
+  z-index: 2;
+  font-style: italic;
+  /* Make review text italic */
 }
 
 .avatar {
