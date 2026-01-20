@@ -192,3 +192,81 @@ faqItems.forEach(item => {
     }
   });
 });
+
+// --- Floating CTA (Mobile) ---
+const floatingCTA = document.querySelector('.floating-cta');
+const heroSection = document.querySelector('.hero-section');
+
+window.addEventListener('scroll', () => {
+  if (floatingCTA && heroSection) {
+    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+    if (window.scrollY > heroBottom) {
+      floatingCTA.classList.add('visible');
+    } else {
+      floatingCTA.classList.remove('visible');
+    }
+  }
+});
+
+
+// --- Quiz Modal Logic ---
+const quizModal = document.querySelector('#quiz-modal');
+const closeBtn = document.querySelector('.modal-close');
+let quizScore = 0;
+
+// Expose 'openQuiz' to global scope (for HTML onclick)
+window.openQuiz = function () {
+  quizModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeQuiz = function () {
+  quizModal.classList.remove('active');
+  document.body.style.overflow = '';
+  // Optional: reset quiz logic here if needed
+};
+
+// Close on overlay click
+quizModal.addEventListener('click', (e) => {
+  if (e.target === quizModal) window.closeQuiz();
+});
+
+closeBtn.addEventListener('click', window.closeQuiz);
+
+
+// Quiz Navigation
+window.startQuiz = function () {
+  document.querySelector('[data-step="start"]').classList.add('hidden');
+  document.querySelector('[data-step="1"]').classList.remove('hidden');
+};
+
+window.nextQuestion = function (points) {
+  quizScore += points;
+  const currentStep = event.target.closest('.quiz-step');
+  const nextStepNum = parseInt(currentStep.dataset.step) + 1;
+
+  currentStep.classList.add('hidden');
+  document.querySelector(`[data-step="${nextStepNum}"]`).classList.remove('hidden');
+};
+
+window.finishQuiz = function (points) {
+  quizScore += points;
+  const currentStep = event.target.closest('.quiz-step');
+  currentStep.classList.add('hidden');
+
+  const resultStep = document.querySelector('[data-step="result"]');
+  resultStep.classList.remove('hidden');
+
+  // Calculate percentage (max score 30)
+  const percentage = Math.round((quizScore / 30) * 100);
+  document.getElementById('quiz-score').textContent = percentage;
+
+  const msgElement = document.getElementById('quiz-msg');
+  if (percentage < 30) {
+    msgElement.textContent = "У вас отличный контроль! Программа поможет закрепить результат.";
+  } else if (percentage < 70) {
+    msgElement.textContent = "Уровень стресса повышен. Пора взять паузу.";
+  } else {
+    msgElement.textContent = "Критический уровень! Вам срочно нужен цифровой детокс.";
+  }
+};

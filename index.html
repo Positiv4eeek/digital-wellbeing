@@ -49,7 +49,7 @@
           </p>
           <div class="hero-actions">
             <a href="#cta" class="btn-primary">Запустить в школе</a>
-            <a href="#solution" class="btn-secondary">Как это работает?</a>
+            <button onclick="openQuiz()" class="btn-secondary">Пройти тест на стресс</button>
           </div>
 
           <div class="stats-grid">
@@ -269,50 +269,133 @@
             </div>
           </div>
         </div>
+      </section>
 
-        <section id="audience" class="section">
-          <div class="container">
-            <h2 class="section-title">Для кого эта программа?</h2>
-            <div class="audience-grid">
-              <div class="audience-card glass-card animate-on-scroll">
-                <h3>Ученики</h3>
-                <p>Улучшают фокус, сон и настроение. Учатся использовать гаджеты осознанно, а не автоматически.</p>
-              </div>
-              <div class="audience-card glass-card animate-on-scroll">
-                <h3>Учителя</h3>
-                <p>Получают более внимательных учеников и методики для поддержания дисциплины без конфликтов.</p>
-              </div>
-              <div class="audience-card glass-card animate-on-scroll">
-                <h3>Родители</h3>
-                <p>Находят общий язык с детьми и спокойствие за их цифровое будущее.</p>
-              </div>
-              <div class="audience-card glass-card highlight animate-on-scroll">
-                <h3>Школа / Колледж</h3>
-                <p>Повышает рейтинги успеваемости, создает имидж современной и заботливой образовательной среды.</p>
-              </div>
+      <section id="audience" class="section">
+        <div class="container">
+          <h2 class="section-title">Для кого эта программа?</h2>
+          <div class="audience-grid">
+            <div class="audience-card glass-card animate-on-scroll">
+              <h3>Ученики</h3>
+              <p>Улучшают фокус, сон и настроение. Учатся использовать гаджеты осознанно, а не автоматически.</p>
+            </div>
+            <div class="audience-card glass-card animate-on-scroll">
+              <h3>Учителя</h3>
+              <p>Получают более внимательных учеников и методики для поддержания дисциплины без конфликтов.</p>
+            </div>
+            <div class="audience-card glass-card animate-on-scroll">
+              <h3>Родители</h3>
+              <p>Находят общий язык с детьми и спокойствие за их цифровое будущее.</p>
+            </div>
+            <div class="audience-card glass-card highlight animate-on-scroll">
+              <h3>Школа / Колледж</h3>
+              <p>Повышает рейтинги успеваемости, создает имидж современной и заботливой образовательной среды.</p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="cta" class="section cta-section">
-          <div class="container text-center">
-            <h2 class="gradient-text">Внедрите культуру цифрового благополучия</h2>
-            <p>Оставьте заявку, чтобы получить полную программу курса и условия внедрения.</p>
-            <form class="cta-form glass-card"
-              onsubmit="event.preventDefault(); alert('Спасибо за заявку! Мы свяжемся с вами.');">
-              <input type="text" placeholder="Ваше имя" required>
-              <input type="email" placeholder="Email школы/колледжа" required>
-              <input type="tel" placeholder="Телефон" required>
-              <button type="submit" class="btn-primary btn-block">Получить программу</button>
-            </form>
-          </div>
-        </section>
+      <section id="cta" class="section cta-section">
+        <div class="container text-center">
+          <h2 class="gradient-text">Внедрите культуру цифрового благополучия</h2>
+          <p>Оставьте заявку, чтобы получить полную программу курса и условия внедрения.</p>
+          <form class="cta-form glass-card"
+            onsubmit="event.preventDefault(); alert('Спасибо за заявку! Мы свяжемся с вами.');">
+            <input type="text" placeholder="Ваше имя" required>
+            <input type="email" placeholder="Email школы/колледжа" required>
+            <input type="tel" placeholder="Телефон" required>
+            <button type="submit" class="btn-primary btn-block">Получить программу</button>
+          </form>
+        </div>
+      </section>
     </main>
 
+    <!-- Floating CTA (Mobile) -->
+    <div class="floating-cta">
+      <a href="#cta" class="btn-primary btn-block">Начать программу</a>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="modal-overlay">
+      <div class="modal-content glass-card">
+        <button class="modal-close" aria-label="Закрыть">×</button>
+        <div class="quiz-container">
+          <div class="quiz-step" data-step="start">
+            <h3>Тест: Ваш уровень цифрового стресса</h3>
+            <p>Узнайте, насколько гаджеты влияют на ваше состояние.</p>
+            <button class="btn-primary" onclick="startQuiz()">Начать тест</button>
+          </div>
+
+          <div class="quiz-step hidden" data-step="1">
+            <h4>Вопрос 1/3</h4>
+            <p>Первое, что вы делаете утром — берете телефон в руки?</p>
+            <div class="quiz-options">
+              <button class="btn-secondary option-btn" onclick="nextQuestion(10)">Да, всегда</button>
+              <button class="btn-secondary option-btn" onclick="nextQuestion(5)">Иногда</button>
+              <button class="btn-secondary option-btn" onclick="nextQuestion(0)">Нет, сначала завтрак</button>
+            </div>
+          </div>
+
+          <div class="quiz-step hidden" data-step="2">
+            <h4>Вопрос 2/3</h4>
+            <p>Чувствуете ли вы тревогу, если забыли телефон дома?</p>
+            <div class="quiz-options">
+              <button class="btn-secondary option-btn" onclick="nextQuestion(10)">Паника!</button>
+              <button class="btn-secondary option-btn" onclick="nextQuestion(5)">Дискомфорт</button>
+              <button class="btn-secondary option-btn" onclick="nextQuestion(0)">Спокойно переживу</button>
+            </div>
+          </div>
+
+          <div class="quiz-step hidden" data-step="3">
+            <h4>Вопрос 3/3</h4>
+            <p>Сколько времени в день вы проводите в соцсетях?</p>
+            <div class="quiz-options">
+              <button class="btn-secondary option-btn" onclick="finishQuiz(10)">Более 3 часов</button>
+              <button class="btn-secondary option-btn" onclick="finishQuiz(5)">1-2 часа</button>
+              <button class="btn-secondary option-btn" onclick="finishQuiz(0)">Меньше часа</button>
+            </div>
+          </div>
+
+          <div class="quiz-step hidden" data-step="result">
+            <h3>Ваш результат: <span id="quiz-score">0</span>% стресса</h3>
+            <p id="quiz-msg"></p>
+            <a href="#cta" class="btn-primary" onclick="closeQuiz()">Получить программу спасения</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer>
-      <div class="container footer-content">
-        <div class="footer-logo">Digital Wellbeing</div>
-        <p>© 2026 Все права защищены.</p>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-logo">Digital Wellbeing</div>
+            <p>Возвращаем реальную жизнь, которая гораздо интереснее ленты новостей.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Программа</h4>
+            <ul class="footer-links">
+              <li><a href="#program">План 7 дней</a></li>
+              <li><a href="#reviews">Отзывы</a></li>
+              <li><a href="#faq">Вопросы</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Контакты</h4>
+            <ul class="footer-links">
+              <li><a href="mailto:hello@digitalwellbeing.kz">hello@digitalwellbeing.kz</a></li>
+              <li><a href="tel:+77771234567">+7 (777) 123-45-67</a></li>
+            </ul>
+            <div class="social-icons">
+              <a href="#">IG</a>
+              <a href="#">TG</a>
+              <a href="#">YT</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Digital Wellbeing. Все права защищены.</p>
+        </div>
       </div>
     </footer>
   </div>
